@@ -59,12 +59,12 @@ You can now check your wallet information and points using the following command
 
 🔹 **Check Wallet Information:**
 ```bash
-aio-cli hive whoami
+aios-cli hive whoami
 ```
 
 🔹 **Check Points:**
 ```bash
-aio-cli hive points
+aios-cli hive points
 ```
 
 ---

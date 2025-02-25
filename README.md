@@ -1,4 +1,3 @@
-# Hyperspace_AI
 
 # Running HyperSpace CLI
 

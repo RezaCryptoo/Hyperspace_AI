@@ -3,7 +3,6 @@
 
 To run **HyperSpace CLI** and connect to the network, follow these steps:
 
-## 🚀 Installation Steps
 
 ### 1️⃣ Create a Wallet and Save Your Private Key
 

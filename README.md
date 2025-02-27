@@ -45,7 +45,7 @@ Enter your choice: 1
 ```
 
 ### 5️⃣ Enter Your Private Key
-Once the model is selected, you will be asked to enter your private key for connecting to the **Hive network**.
+After selecting the model, you will be asked to enter your private key for connection.
 
 ```
 Enter your Private Key:

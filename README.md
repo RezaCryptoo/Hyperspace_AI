@@ -22,6 +22,7 @@ To download and install **HyperSpace Node**, use the provided script. Follow the
 
 ```bash
 rm -rf Hyperspace_AI && git clone https://github.com/RezaCryptoo/Hyperspace_AI.git && cd Hyperspace_AI
+```
 
 
 ### 3️⃣ Run the Installation Script

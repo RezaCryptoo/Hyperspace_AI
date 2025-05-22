@@ -22,10 +22,11 @@ To download and install **HyperSpace Node**, use the provided script. Follow the
 
   ```bash
 rm -rf Hyperspace_AI && git clone https://github.com/RezaCryptoo/Hyperspace_AI.git && cd Hyperspace_AI
-  ```
+```
 
 ### 3️⃣ Run the Installation Script
-Execute the following command:
+
+Execute the following command
 ```bash
 sudo bash -c 'chmod +x install-aios.sh && ./install-aios.sh'
 ```

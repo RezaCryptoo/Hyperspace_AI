@@ -60,16 +60,12 @@ systemctl daemon-reload
 systemctl start aios.service
 systemctl enable aios.service
 
-# Terminal menu for model selection
+# Terminal menu for model selection (only models 1, 2, 3)
 while true; do
   echo "Select a model to download:"
   echo "1) Qwen 1.5-1.8B-Chat"
   echo "2) Phi-2"
   echo "3) Mistral v0.1 Q4_K_S (TheBloke)"
-  echo "4) llama-3.2-3b-instruct-q8_0 (hugging-quants)"
-  echo "5) starcoder2-3b_Q8_0 (nold)"
-  echo "6) sarvam-1-Q8_0 (bartowski)"
-  echo "7) Nemotron-Mini-4B-Instruct-Q4_K_M (bartowski)"
   read -rp "Enter the number of your choice: " model_choice
 
   case $model_choice in
@@ -84,22 +80,6 @@ while true; do
     3)
       echo "🔹 Downloading Mistral v0.1..."
       aios-cli models add hf:TheBloke/Mistral-7B-Instruct-v0.1-GGUF:mistral-7b-instruct-v0.1.Q4_K_S.gguf && break
-      ;;
-    4)
-      echo "🔹 Downloading llama-3.2-3b-instruct..."
-      aios-cli models add hf:hugging-quants/llama-3.2-3b-instruct-q8_0.gguf && break
-      ;;
-    5)
-      echo "🔹 Downloading starcoder2-3b..."
-      aios-cli models add hf:nold/starcoder2-3b_Q8_0.gguf && break
-      ;;
-    6)
-      echo "🔹 Downloading sarvam-1-Q8_0..."
-      aios-cli models add hf:bartowski/sarvam-1-Q8_0.gguf && break
-      ;;
-    7)
-      echo "🔹 Downloading Nemotron-Mini-4B-Instruct..."
-      aios-cli models add hf:bartowski/Nemotron-Mini-4B-Instruct-Q4_K_M.gguf && break
       ;;
     *)
       echo "❌ Invalid selection. Please try again."

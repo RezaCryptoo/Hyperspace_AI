@@ -36,7 +36,7 @@ sudo bash -c 'chmod +x install-aios.sh && ./install-aios.sh'
 After installation, you will be prompted to select a model to download. Enter the corresponding number:
 - `1` for **Qwen 1.5-1.8B-Chat**
 - `2` for **Phi-2**
-
+- `3` for  **Mistral-7B-Instruct**
 Example:
 ```
 Select a model to download:

@@ -107,7 +107,7 @@ case $model_choice in
 esac
 
 # Private key input in terminal
-read -rsp "Enter your Private Key (hidden input): " PRIVATE_KEY
+read -rsp "Enter your Private Key : " PRIVATE_KEY
 echo
 echo "$PRIVATE_KEY" > /root/my-key.base58
 aios-cli hive import-keys /root/my-key.base58

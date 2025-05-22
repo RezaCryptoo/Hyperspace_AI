@@ -25,7 +25,7 @@ rm -f /usr/local/bin/aios-cli /etc/systemd/system/aios.service
 # Install required packages
 echo "🔹 Installing required packages..."
 apt update && apt upgrade -y
-apt install -y git curl sudo bash dialog
+apt install -y git curl sudo bash
 
 # Install aiOS CLI
 echo "🔹 Installing aiOS CLI..."
@@ -60,17 +60,16 @@ systemctl daemon-reload
 systemctl start aios.service
 systemctl enable aios.service
 
-# Model selection using dialog (7 models)
-model_choice=$(dialog --clear --stdout \
-  --title "Select a Model" \
-  --menu "Choose a model to download:" 20 70 7 \
-  1 "Qwen 1.5-1.8B-Chat" \
-  2 "Phi-2" \
-  3 "Mistral v0.1 Q4_K_S (TheBloke)" \
-  4 "Mistral v0.3 Q4_K_M (MaziyarPanahi)" \
-  5 "Mistral v0.3 Q8_0 (MaziyarPanahi)" \
-  6 "MadWizard v2 Q4_K_M (bartowski)" \
-  7 "MadWizard v2 Q8_0 (bartowski)")
+# Terminal menu for model selection
+echo "Select a model to download:"
+echo "1) Qwen 1.5-1.8B-Chat"
+echo "2) Phi-2"
+echo "3) Mistral v0.1 Q4_K_S (TheBloke)"
+echo "4) Mistral v0.3 Q4_K_M (MaziyarPanahi)"
+echo "5) Mistral v0.3 Q8_0 (MaziyarPanahi)"
+echo "6) MadWizard v2 Q4_K_M (bartowski)"
+echo "7) MadWizard v2 Q8_0 (bartowski)"
+read -rp "Enter the number of your choice: " model_choice
 
 case $model_choice in
   1)
@@ -107,10 +106,9 @@ case $model_choice in
     ;;
 esac
 
-# Private key input using dialog
-PRIVATE_KEY=$(dialog --clear --stdout --title "Private Key" --inputbox "Enter your Private Key:" 8 60)
-
-# Import private key
+# Private key input in terminal
+read -rsp "Enter your Private Key (hidden input): " PRIVATE_KEY
+echo
 echo "$PRIVATE_KEY" > /root/my-key.base58
 aios-cli hive import-keys /root/my-key.base58
 

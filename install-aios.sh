@@ -60,51 +60,54 @@ systemctl daemon-reload
 systemctl start aios.service
 systemctl enable aios.service
 
-# Terminal menu for model selection
-echo "Select a model to download:"
-echo "1) Qwen 1.5-1.8B-Chat"
-echo "2) Phi-2"
-echo "3) Mistral v0.1 Q4_K_S (TheBloke)"
-echo "4) Mistral v0.3 Q4_K_M (MaziyarPanahi)"
-echo "5) Mistral v0.3 Q8_0 (MaziyarPanahi)"
-echo "6) MadWizard v2 Q4_K_M (bartowski)"
-echo "7) MadWizard v2 Q8_0 (bartowski)"
-read -rp "Enter the number of your choice: " model_choice
+# Terminal menu for model selection with retry on failure
+while true; do
+  echo "Select a model to download:"
+  echo "1) Qwen 1.5-1.8B-Chat"
+  echo "2) Phi-2"
+  echo "3) Mistral v0.1 Q4_K_S (TheBloke)"
+  echo "4) Mistral v0.3 Q4_K_M (MaziyarPanahi)"
+  echo "5) Mistral v0.3 Q8_0 (MaziyarPanahi)"
+  echo "6) MadWizard v2 Q4_K_M (bartowski)"
+  echo "7) MadWizard v2 Q8_0 (bartowski)"
+  read -rp "Enter the number of your choice: " model_choice
 
-case $model_choice in
-  1)
-    echo "🔹 Downloading Qwen..."
-    aios-cli models add hf:Qwen/Qwen1.5-1.8B-Chat-GGUF:qwen1_5-1_8b-chat-q4_k_m.gguf
-    ;;
-  2)
-    echo "🔹 Downloading Phi-2..."
-    aios-cli models add hf:TheBloke/phi-2-GGUF:phi-2.Q4_K_M.gguf
-    ;;
-  3)
-    echo "🔹 Downloading Mistral v0.1..."
-    aios-cli models add hf:TheBloke/Mistral-7B-Instruct-v0.1-GGUF:mistral-7b-instruct-v0.1.Q4_K_S.gguf
-    ;;
-  4)
-    echo "🔹 Downloading Mistral v0.3 Q4_K_M..."
-    aios-cli models add hf:MaziyarPanahi/Mistral-7B-Instruct-v0.3.Q4_K_M.gguf
-    ;;
-  5)
-    echo "🔹 Downloading Mistral v0.3 Q8_0..."
-    aios-cli models add hf:MaziyarPanahi/Mistral-7B-Instruct-v0.3.Q8_0.gguf
-    ;;
-  6)
-    echo "🔹 Downloading MadWizard v2 Q4_K_M..."
-    aios-cli models add hf:bartowski/MadWizard-SFT-v2-Mistral-7b-v0.3-Q4_K_M.gguf
-    ;;
-  7)
-    echo "🔹 Downloading MadWizard v2 Q8_0..."
-    aios-cli models add hf:bartowski/MadWizard-SFT-v2-Mistral-7b-v0.3-Q8_0.gguf
-    ;;
-  *)
-    echo "❌ Invalid selection. Exiting."
-    exit 1
-    ;;
-esac
+  case $model_choice in
+    1)
+      echo "🔹 Downloading Qwen..."
+      aios-cli models add hf:Qwen/Qwen1.5-1.8B-Chat-GGUF:qwen1_5-1_8b-chat-q4_k_m.gguf && break
+      ;;
+    2)
+      echo "🔹 Downloading Phi-2..."
+      aios-cli models add hf:TheBloke/phi-2-GGUF:phi-2.Q4_K_M.gguf && break
+      ;;
+    3)
+      echo "🔹 Downloading Mistral v0.1..."
+      aios-cli models add hf:TheBloke/Mistral-7B-Instruct-v0.1-GGUF:mistral-7b-instruct-v0.1.Q4_K_S.gguf && break
+      ;;
+    4)
+      echo "🔹 Downloading Mistral v0.3 Q4_K_M..."
+      aios-cli models add hf:MaziyarPanahi/Mistral-7B-Instruct-v0.3.Q4_K_M.gguf && break
+      ;;
+    5)
+      echo "🔹 Downloading Mistral v0.3 Q8_0..."
+      aios-cli models add hf:MaziyarPanahi/Mistral-7B-Instruct-v0.3.Q8_0.gguf && break
+      ;;
+    6)
+      echo "🔹 Downloading MadWizard v2 Q4_K_M..."
+      aios-cli models add hf:bartowski/MadWizard-SFT-v2-Mistral-7b-v0.3-Q4_K_M.gguf && break
+      ;;
+    7)
+      echo "🔹 Downloading MadWizard v2 Q8_0..."
+      aios-cli models add hf:bartowski/MadWizard-SFT-v2-Mistral-7b-v0.3-Q8_0.gguf && break
+      ;;
+    *)
+      echo "❌ Invalid selection."
+      ;;
+  esac
+
+  echo "⚠️ Model download failed. Please check your network or model availability and try again."
+done
 
 # Private key input in terminal
 read -rsp "Enter your Private Key : " PRIVATE_KEY

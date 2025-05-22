@@ -5,7 +5,7 @@ echo "    ____                      ______                 __            "
 echo "   / __ \\___  ____  ____ _   / ____/______  ______  / /_____  ____ "
 echo "  / /_/ / _ \\/_  / / __ \`/  / /   / ___/ / / / __ \\/ __/ __ \\/ __ \\"
 echo " / _, _/  __/ / /_/ /_/ /  / /___/ /  / /_/ / /_/ / /_/ /_/ / /_/ /"
-echo "_/ |_|\___/ /___/\\__,_/   \\____/_/   \\__, / .___/\\__/\\____/\\____/ "
+echo "_/ |_|\\___/ /___/\\__,_/   \\____/_/   \\__, / .___/\\__/\\____/\\____/ "
 echo "                                     /____/_/                      "
 
 # Display Twitter and Telegram links
@@ -37,6 +37,10 @@ if [ -f "/etc/systemd/system/aios.service" ]; then
     sudo rm /etc/systemd/system/aios.service
     echo "🔹 Previous systemd service removed."
 fi
+
+# Additional cleanup for models and hyperspace directories
+sudo rm -rf /root/.cache/hyperspace/models/
+sudo rm -rf /opt/hyperspace
 
 # Install required packages
 echo "🔹 Installing required packages..."
@@ -89,7 +93,8 @@ sudo systemctl status aios.service --no-pager
 echo "🔹 Please choose a model to download:"
 echo "1. Qwen 1.5-1.8B-Chat"
 echo "2. Phi-2"
-read -p "Enter the number of the model you want to download (1 or 2): " model_choice
+echo "3. Mistral-7B-Instruct"
+read -p "Enter the number of the model you want to download (1, 2 or 3): " model_choice
 
 # Download the selected model
 if [ "$model_choice" -eq 1 ]; then
@@ -98,6 +103,9 @@ if [ "$model_choice" -eq 1 ]; then
 elif [ "$model_choice" -eq 2 ]; then
     echo "🔹 Downloading Phi-2 model..."
     aios-cli models add hf:TheBloke/phi-2-GGUF:phi-2.Q4_K_M.gguf
+elif [ "$model_choice" -eq 3 ]; then
+    echo "🔹 Downloading Mistral-7B-Instruct model..."
+    aios-cli models add hf:TheBloke/Mistral-7B-Instruct-v0.1-GGUF:mistral-7b-instruct-v0.1.Q4_K_S.gguf
 else
     echo "Invalid choice, exiting."
     exit 1
@@ -111,7 +119,7 @@ echo "🔹 Importing private key..."
 echo "$PRIVATE_KEY" > /root/my-key.base58
 aios-cli hive import-keys /root/my-key.base58
 
-# **Login and connect to Hive**
+# Login and connect to Hive
 echo "🔹 Logging into Hive..."
 aios-cli hive login
 echo "🔹 Connecting to Hive..."

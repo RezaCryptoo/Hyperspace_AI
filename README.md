@@ -41,7 +41,8 @@ Example:
 Select a model to download:
 1. Qwen 1.5-1.8B-Chat
 2. Phi-2
-Enter your choice: 1
+3. Mistral-7B-Instruct
+Enter your choice: 
 ```
 
 ### 5️⃣ Enter Your Private Key
